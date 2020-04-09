@@ -7,7 +7,7 @@ import pyautogui
 
 
 #phyphox configuration
-PP_ADDRESS = "http://192.168.1.232"
+PP_ADDRESS = "http://192.168.1.251:8080"
 PP_CHANNELS = ["accX", "accY", "accZ"]
 sampling_rate = 100
 
@@ -95,8 +95,9 @@ def main():
     if isCollectData == True:
        while True:
           [t, naccX, naccY, naccZ] = getData()
-          print(t, ' ', naccX, ' ', naccY, ' ', naccY)
-          pyautogui.move(naccX*10, naccY*10)
+          print(t, ' ', naccX, ' ', naccY, ' ', naccZ)
+          if naccX and naccY and naccZ:
+            pyautogui.move(-naccX*10, naccY*10)
           #time.sleep(INTERVALS/1000)   # Delays for INTERVALS seconds.
 
 if __name__ == '__main__':
