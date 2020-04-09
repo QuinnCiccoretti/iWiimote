@@ -96,7 +96,7 @@ def main():
        while True:
           [t, naccX, naccY, naccZ] = getData()
           print(t, ' ', naccX, ' ', naccY, ' ', naccY)
-          pyautogui.move(0, naccX*5)
+          pyautogui.move(naccX*10, naccY*10)
           #time.sleep(INTERVALS/1000)   # Delays for INTERVALS seconds.
 
 if __name__ == '__main__':
