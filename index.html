@@ -15,13 +15,16 @@
                ws.onopen = function() {
                   
                   // Web Socket is connected, send data using send()
-                  ws.send("I am javascript");
-                  alert("Message is sent...");
+                  for(var i = 0; i< 100; i++){
+                  	ws.send("I am javascript #"+i);
+                  }
+                  
+                  // alert("Message is sent...");
                };
 				
                ws.onmessage = function (evt) { 
                   var received_msg = evt.data;
-                  alert("Message is received...");
+                  // alert("Message is received...");
                };
 				
                ws.onclose = function() { 
