@@ -1,12 +1,16 @@
 import socket
 
-UDP_IP = "127.0.0.1"
-UDP_PORT = 5005
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-sock.bind((UDP_IP, UDP_PORT))
+TCP_IP = '127.0.0.1'
+TCP_PORT = 5005
+BUFFER_SIZE = 1024
+MESSAGE = "Hello, World!"
 
-while True:
-    data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-    print("received message:")
-    print(data.decode())
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((TCP_IP, TCP_PORT))
+s.send(MESSAGE.encode())
+data = s.recv(BUFFER_SIZE)
+s.close()
+
+print("received data:")
+print(data.decode())

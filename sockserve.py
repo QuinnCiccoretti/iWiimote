@@ -1,12 +1,16 @@
-import socket
+import asyncio
+import websockets
 
-UDP_IP = "127.0.0.1"
-UDP_PORT = 5005
-MESSAGE = "Hello, World!"
+async def hello(websocket, path):
+    name = await websocket.recv()
+    print(f"< {name}")
 
-print("UDP target IP:", UDP_IP)
-print("UDP target port:", UDP_PORT)
-print("message:", MESSAGE)
+    greeting = f"Hello {name}!"
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-sock.sendto(MESSAGE.encode(), (UDP_IP, UDP_PORT))
+    await websocket.send(greeting)
+    print(f"> {greeting}")
+
+start_server = websockets.serve(hello, "localhost", 8765)
+
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
