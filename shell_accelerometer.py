@@ -10,11 +10,12 @@ PP_CHANNELS = ["accX", "accY", "accZ"]
 async def fetchJSON(url, session):
 	async with session.get(url) as response:
 		data = await response.json()
+		print(data)
 		accX = data["buffer"][PP_CHANNELS[0]]["buffer"][0]
 		accY = data["buffer"][PP_CHANNELS[1]]["buffer"][0]
 		accZ = data["buffer"][PP_CHANNELS[2]]["buffer"][0]
 		# 
-		pyautogui.move(-accX*20, accY*20)
+		pyautogui.moveRel(-accX*20, -accY*20,0, pyautogui.easeOutQuad)
 
 
 async def sendNRequests(url, n):
@@ -32,7 +33,7 @@ async def sendNRequests(url, n):
 def main():
 	loop = asyncio.get_event_loop()
 	url = PP_ADDRESS + "/get?" + ("&".join(PP_CHANNELS))
-	N_REQUESTS = 2
+	N_REQUESTS = 1
 	while True:
 		future = asyncio.ensure_future(sendNRequests(url, N_REQUESTS))
 		loop.run_until_complete(future)
