@@ -1,16 +1,15 @@
-import socket
+import asyncio
+import websockets
 
+async def hello():
+    uri = "ws://localhost:8765"
+    async with websockets.connect(uri) as websocket:
+        name = input("What's your name? ")
 
-TCP_IP = '127.0.0.1'
-TCP_PORT = 5005
-BUFFER_SIZE = 1024
-MESSAGE = "Hello, World!"
+        await websocket.send(name)
+        print(f"> {name}")
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((TCP_IP, TCP_PORT))
-s.send(MESSAGE.encode())
-data = s.recv(BUFFER_SIZE)
-s.close()
+        greeting = await websocket.recv()
+        print(f"< {greeting}")
 
-print("received data:")
-print(data.decode())
+asyncio.get_event_loop().run_until_complete(hello())
