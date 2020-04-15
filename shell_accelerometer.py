@@ -10,7 +10,6 @@ PP_CHANNELS = ["accX", "accY", "accZ"]
 async def fetchJSON(url, session):
 	async with session.get(url) as response:
 		data = await response.json()
-		print(data)
 		accX = data["buffer"][PP_CHANNELS[0]]["buffer"][0]
 		accY = data["buffer"][PP_CHANNELS[1]]["buffer"][0]
 		accZ = data["buffer"][PP_CHANNELS[2]]["buffer"][0]
