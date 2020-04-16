@@ -100,9 +100,29 @@ function handleOrientation(event) {
 window.addEventListener('deviceorientation', handleOrientation);
       </script>
 
+      <!--  -->
+      <script>
+         function onClick() {
+         console.log("Bet");
+         // feature detect
+         if (typeof DeviceMotionEvent.requestPermission === 'function') {
+            DeviceMotionEvent.requestPermission()
+            .then(permissionState => {
+               if (permissionState === 'granted') {
+                  window.addEventListener('devicemotion', () => {});
+               }
+            })
+            .catch(console.error);
+         } else {
+            // handle regular non iOS 13+ devices
+         }
+      }
+      </script>
+
       <!-- Websocket-Test  -->
       <div id = "sse">
          <a href = "javascript:WebSocketTest()">Run WebSocket</a>
+         <a href = "javascript:onClick()">Give Permissions</a>
       </div>
       <div class="garden">
          <div class="ball"></div>
