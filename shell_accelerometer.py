@@ -18,8 +18,8 @@ PREV_SAMPLE = 50
 INTERVALS = 1000/sampling_rate
 
 
-#global var to save timestamp
-xs = []
+async def sendNRequests(url, n):
+	tasks = []
 
 
 # make one of them true at a time
