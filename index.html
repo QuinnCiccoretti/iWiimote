@@ -100,16 +100,15 @@ function handleOrientation(event) {
 window.addEventListener('deviceorientation', handleOrientation);
       </script>
 
-      <!--  -->
+      <!-- Give Permissions -->
       <script>
-         function onClick() {
-         console.log("Bet");
+      function onClick() {
          // feature detect
-         if (typeof DeviceMotionEvent.requestPermission === 'function') {
-            DeviceMotionEvent.requestPermission()
+         if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+            DeviceOrientationEvent.requestPermission()
             .then(permissionState => {
                if (permissionState === 'granted') {
-                  window.addEventListener('devicemotion', () => {});
+                  window.addEventListener('deviceorientation', () => {});
                }
             })
             .catch(console.error);
