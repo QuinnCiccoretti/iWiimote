@@ -27,13 +27,14 @@
       
       <!-- Websocket Test -->
       <script type = "text/javascript">
-         function WebSocketTest() {
-            
+         function WebSocketTest() { 
             if ("WebSocket" in window) {
                alert("WebSocket is supported by your Browser!");
                
                // Let us open a web socket
-               var ws = new WebSocket("ws://localhost:8080");
+               // var ws = new WebSocket("ws://localhost:8080");
+               let finalDigits = document.getElementById("lastDigits").value;
+               var ws = new WebSocket("ws://192.168.1."+ finalDigits +":8080");
 				
                ws.onopen = function() {
                   
@@ -66,7 +67,7 @@
    </head>
    
    <body>
-      <!-- Websocket-Test  -->
+      <!-- HTML  -->
       <div id = "sse">
          <a href = "javascript:WebSocketTest()">Run WebSocket</a>
          <a href = "javascript:onClick()">Give Permissions</a>
@@ -74,6 +75,8 @@
       <div class="garden">
          <div class="ball"></div>
       </div>
+
+      <input id="lastDigits" type="text" name="lastDigits"/>
       
       <pre class="output"></pre>
       <!-- Orientation Test -->
