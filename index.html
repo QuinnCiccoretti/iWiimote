@@ -34,7 +34,7 @@
                // Let us open a web socket
                // var ws = new WebSocket("ws://localhost:8080");
                let finalDigits = document.getElementById("lastDigits").value;
-               var ws = new WebSocket("ws://192.168."+ finalDigits +":12000");
+               var ws = new WebSocket("wss://192.168."+ finalDigits +":12000");
                
                ws.onopen = function() {
                   
