@@ -7,7 +7,7 @@ import mouse
 PP_ADDRESS = "http://192.168.1.232"
 PP_CHANNELS = ["accX", "accY", "accZ"]
 LOCK_INPUT = False
-
+RELEASE = True
 def update(url):
 	data = requests.get(url=url).json()
 	accX = data["buffer"][PP_CHANNELS[0]]["buffer"][0]
@@ -24,20 +24,16 @@ def update(url):
 		down = accX > threshold
 		any_input = up or down or left or right
 		if(not LOCK_INPUT):
+			move_dir = None
 			if(left):
-				print("Left")
-				keyboard.press_and_release('left')
+				move_dir = "left"
 			if(right):
-				print("Right")
-				keyboard.press_and_release('right')
-
+				move_dir = "right"
 			if(up):
-				print("up")
-				keyboard.press_and_release('up')
-			
+				move_dir = "up"			
 			if(down):
-				print("Down")
-				keyboard.press_and_release('down')
+				move_dir = "down"
+			
 			if(any_input):
 				LOCK_INPUT = True
 		elif(not any_input):
