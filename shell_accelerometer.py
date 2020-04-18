@@ -1,6 +1,7 @@
 from aiohttp import ClientSession
 import asyncio
-import pyautogui
+import keyboard
+import mouse
 
 
 #phyphox configuration
@@ -14,23 +15,23 @@ async def fetchJSON(url, session):
 		accY = data["buffer"][PP_CHANNELS[1]]["buffer"][0]
 		accZ = data["buffer"][PP_CHANNELS[2]]["buffer"][0]
 		# 
-		# pyautogui.moveRel(-accX*20, -accY*20,0, pyautogui.easeOutQuad)
+		# mouse.move(-accX*20, -accY*20, absolute=False)
 		if(accX and accY and accZ):
 			print(accX, accY, accZ, sep=" ")
 			if(accY < -2.0):
-				pyautogui.keyDown('left')
+				keyboard.press('left')
 			else:
-				pyautogui.keyUp('left')
+				keyboard.release('left')
 
 			if(accY > 2.5):
-				pyautogui.keyDown('right')
+				keyboard.press('right')
 			else:
-				pyautogui.keyUp('right')
+				keyboard.release('right')
 
 			if(accZ < -1):
-				pyautogui.keyDown('up')
+				keyboard.press('up')
 			else:
-				pyautogui.keyUp('up')
+				keyboard.release('up')
 
 
 async def sendNRequests(url, n):
