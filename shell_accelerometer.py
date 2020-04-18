@@ -1,12 +1,12 @@
-from aiohttp import ClientSession
+clearfrom aiohttp import ClientSession
 import asyncio
 import keyboard
 import mouse
 
 
 #phyphox configuration
-PP_ADDRESS = "http://192.168.1.251:8080"
-PP_CHANNELS = ["accX", "accY", "accZ", "gyrX", "gyrY", "gyrZ"]
+PP_ADDRESS = "http://192.168.1.232"
+PP_CHANNELS = ["accX", "accY", "accZ", "gyroX", "gyroY", "gyroZ"]
 
 async def fetchJSON(url, session):
 	async with session.get(url) as response:
@@ -15,7 +15,9 @@ async def fetchJSON(url, session):
 		accX = data["buffer"][PP_CHANNELS[0]]["buffer"][0]
 		accY = data["buffer"][PP_CHANNELS[1]]["buffer"][0]
 		accZ = data["buffer"][PP_CHANNELS[2]]["buffer"][0]
-		# Gyroscope
+		mag = accX *accX + accY*accY + accZ*accZ
+                print(mag)
+                # Gyroscope
 		gyrX = data["buffer"][PP_CHANNELS[3]]["buffer"][0]
 		gyrY = data["buffer"][PP_CHANNELS[4]]["buffer"][0]
 		gyrZ = data["buffer"][PP_CHANNELS[5]]["buffer"][0]
@@ -23,7 +25,7 @@ async def fetchJSON(url, session):
 		# 
 		if(accX and accY and accZ):
 			# print(gyrX, gyrY, gyrZ, sep=" ")
-			mouse.move(-gyrZ*20, -gyrX*20, absolute=False)
+			mouse.move(-gyrZ*25, -gyrX*25, absolute=False)
 			# print(mouse.get_position())
 			# if accY > 0.75 or accY < -0.75:
 			# 	mouse.move(accY*5, 0, absolute=False)
