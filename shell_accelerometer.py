@@ -4,18 +4,33 @@ import pyautogui
 
 
 #phyphox configuration
-PP_ADDRESS = "http://192.168.1.232"
+PP_ADDRESS = "http://192.168.1.251:8080"
 PP_CHANNELS = ["accX", "accY", "accZ"]
 
 async def fetchJSON(url, session):
 	async with session.get(url) as response:
 		data = await response.json()
-		print(data)
 		accX = data["buffer"][PP_CHANNELS[0]]["buffer"][0]
 		accY = data["buffer"][PP_CHANNELS[1]]["buffer"][0]
 		accZ = data["buffer"][PP_CHANNELS[2]]["buffer"][0]
 		# 
-		pyautogui.moveRel(-accX*20, -accY*20,0, pyautogui.easeOutQuad)
+		# pyautogui.moveRel(-accX*20, -accY*20,0, pyautogui.easeOutQuad)
+		if(accX and accY and accZ):
+			print(accX, accY, accZ, sep=" ")
+			if(accY < -2.0):
+				pyautogui.keyDown('left')
+			else:
+				pyautogui.keyUp('left')
+
+			if(accY > 2.5):
+				pyautogui.keyDown('right')
+			else:
+				pyautogui.keyUp('right')
+
+			if(accZ < -1):
+				pyautogui.keyDown('up')
+			else:
+				pyautogui.keyUp('up')
 
 
 async def sendNRequests(url, n):
