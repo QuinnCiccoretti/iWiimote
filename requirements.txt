@@ -1,4 +1,0 @@
-pyautogui
-asyncio
-websockets
-socket
