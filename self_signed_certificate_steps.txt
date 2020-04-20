@@ -1,0 +1,20 @@
+# Generate 2048 bit RSA private key (no passphrase)
+openssl genrsa -out privkey.pem 2048
+
+# Generate certificate signing request (CSR)
+openssl req -new -key privkey.pem -out signreq.csr
+
+# Sign the certificate signing request
+openssl x509 -req -days 365 -in signreq.csr -signkey privkey.pem -out certificate.pem
+
+# All steps combined
+openssl req -newkey rsa:2048 -nodes -keyout privkey.pem -x509 -days 36500 -out certificate.pem
+
+
+After starting the server, in your browser navigate to it
+  ex: https://ip_address:port
+
+and have your browser trust the certificate
+
+Then you can open up our website and connect to that server
+with the websocket
