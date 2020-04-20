@@ -7,32 +7,37 @@ from controls import Game
 
 #phyphox configuration
 PP_ADDRESS = "http://192.168.1.4"
-PP_CHANNELS = ["accX", "accY", "accZ"]
+PP_CHANNELS = ["accX", "accY", "accZ", "gyroX", "gyroY", "gyroZ"]
+# PP_CHANNELS = ["accX", "accY", "accZ", "gyrX", "gyrY", "gyrZ"]
 
 async def fetchJSON(url, session):
 	async with session.get(url) as response:
 		data = await response.json()
+		# Accelerometer
 		accX = data["buffer"][PP_CHANNELS[0]]["buffer"][0]
 		accY = data["buffer"][PP_CHANNELS[1]]["buffer"][0]
 		accZ = data["buffer"][PP_CHANNELS[2]]["buffer"][0]
+		# Gyroscope
+		gyrX = data["buffer"][PP_CHANNELS[3]]["buffer"][0]
+		gyrY = data["buffer"][PP_CHANNELS[4]]["buffer"][0]
+		gyrZ = data["buffer"][PP_CHANNELS[5]]["buffer"][0]
+
 		# 
-		mouse.move(accY*10,0, absolute=False)
 		if(accX and accY and accZ):
-			print(accX, accY, accZ, sep=" ")
-			if(accY < -2.0):
-				keyboard.press('left')
-			else:
-				keyboard.release('left')
+			# print(gyrX, gyrY, gyrZ, sep=" ")
+			mouse.move(-gyrZ*20, -gyrX*20, absolute=False)
+			# print(mouse.get_position())
+			# if accY > 0.75 or accY < -0.75:
+			# 	mouse.move(accY*5, 0, absolute=False)
 
-			if(accY > 2.5):
-				keyboard.press('right')
-			else:
-				keyboard.release('right')
+			# if(accZ < -1):
+			# 	keyboard.press('space')
+			# else:
+			# 	keyboard.release('space')
 
-			if(accZ < -1):
-				keyboard.press('up')
-			else:
-				keyboard.release('up')
+			# if(accX < -1):
+			# 	mouse.press(mouse.LEFT)
+			# 	mouse.release(mouse.LEFT)
 
 
 async def sendNRequests(url, n):
