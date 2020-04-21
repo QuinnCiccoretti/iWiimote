@@ -23,16 +23,16 @@ def update(iw):
         if(not LOCK_INPUT):
             move_dir = None
             if(left):
-                    move_dir = "left"
+                move_dir = "left"
             if(right):
-                    move_dir = "right"
+                move_dir = "right"
             if(up):
-                    move_dir = "up"			
+                move_dir = "up"			
             if(down):
-                    move_dir = "down"
-            
+                move_dir = "down"
             if(any_input):
-                    LOCK_INPUT = True
+                keyboard.press_and_release(move_dir)
+                LOCK_INPUT = True
         elif(not any_input):
                 LOCK_INPUT=False
 
