@@ -3,7 +3,6 @@ import mouse
 from iWiimote import iWiimote
 
 #phyphox configuration
-LOCK_INPUT = False
 MOVE_DIR = "left"
 PP_CHANNELS = ["accX", "accY", "accZ"]
 def update(iw):
@@ -12,33 +11,33 @@ def update(iw):
     accY = data["accY"]
     accZ = data["accZ"]
     
-    global LOCK_INPUT
-    global MOVE_DIR
     threshold = 3
     
     if(accX and accY and accZ):
         left = accY < -threshold
         right = accY > threshold
-        up = accX < -threshold
-        down = accX > threshold
-        any_input = up or down or left or right
-        if(not LOCK_INPUT):
-            move_dir = None
-            if(left):
-                move_dir = "left"
-            if(right):
-                move_dir = "right"
-            if(up):
-                move_dir = "up"			
-            if(down):
-                move_dir = "down"
-            if(any_input):
-                keyboard.press(move_dir)
-                LOCK_INPUT = True
-        elif(not any_input):
-                LOCK_INPUT=False
-                for direc in ["up","down", "left", "right"]:
-                    keyboard.release(direc)
+        up = accX > threshold*2
+        down = accX < -threshold*2
+        
+        if(left):
+            keyboard.press("left")
+        else:
+            keyboard.release("left")
+        
+        if(right):
+            keyboard.press("right")
+        else:
+            keyboard.release("right")
+        
+        if(up):
+            keyboard.press("s")
+        else:
+            keyboard.release("s")
+        
+        if(down):
+            keyboard.press("down")
+        else:
+            keyboard.release("down")
 
 			
 def main():
