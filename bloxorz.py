@@ -1,7 +1,7 @@
 import keyboard
 import mouse
 from iWiimote import iWiimote
-import fire
+
 #phyphox configuration
 LOCK_INPUT = False
 PP_CHANNELS = ["accX", "accY", "accZ"]

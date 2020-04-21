@@ -14,4 +14,8 @@ class iWiimote(object):
 
 # Doesn't do anything but expose the url to fire
 def getIpString(ip):
-        return ip
+        addr = ip.strip()
+        nparts = len(addr.split("."))
+        if nparts !=4:
+            raise ValueError("Bad Ip String")
+        return addr
