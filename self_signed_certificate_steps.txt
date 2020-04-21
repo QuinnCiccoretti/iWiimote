@@ -16,5 +16,11 @@ After starting the server, in your browser navigate to it
 
 and have your browser trust the certificate
 
-Then you can open up our website and connect to that server
+Then you can open up our website (https://desolate-lake-12331.herokuapp.com/) and connect to that server
 with the websocket
+
+Run ./generateCerts.sh IP and then on iOS, email youself the myCA.cert and iwiimote_server.cert. Save each cert to files.
+Open the myCA.cer file first. Open profile and then install the profile on your phone. Go to About then scroll to bottom to Certificate Trust Settings. 
+Activiate iWiimote CA.  Go back to files to download the iwiimote_server.cer. Go to profiles and trust the new Profile with your IP address as the common name.
+Go to https://iwiimote.herokuapp.com and have fun!
+

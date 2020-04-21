@@ -40,8 +40,8 @@
                 // Let us open a web socket
                 // var ws = new WebSocket("ws://localhost:8080");
                 let finalDigits = document.getElementById("lastDigits").value;
-                // var ws = new WebSocket("wss://192.168." + finalDigits + ":12000");
-                var ws = new WebSocket("wss://localhost:8765");
+                var ws = new WebSocket("wss://192.168." + finalDigits + ":12000");
+                // var ws = new WebSocket("wss://localhost:8765");
 
                 ws.onopen = function () {
                     // Web Socket is connected, send data using send()
