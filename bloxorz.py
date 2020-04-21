@@ -41,9 +41,6 @@ def main():
     iw = iWiimote(PP_CHANNELS)
     while True:
         update(iw)
-#does nothing but expose the ui to fire
-def getIpString(ip):
-    return ip
 
 if __name__ == '__main__':
     main()
