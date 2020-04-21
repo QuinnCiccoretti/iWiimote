@@ -1,8 +1,9 @@
 import requests
 import fire
 class iWiimote(object):
-    def __init__(self, ip_addr, channels):
+    def __init__(self, channels):
         self.channels = channels
+        ip_addr = fire.Fire(getIpString)
         self.url = "http://"+ip_addr + "/get?" + ("&".join(channels))
     def getData(self):
             data = requests.get(url=self.url).json()
@@ -11,6 +12,6 @@ class iWiimote(object):
                 clean_data[channel] = data["buffer"][channel]["buffer"][0]
             return clean_data
 
-    # Doesn't do anything but expose the url to fire
-    def getIpString(ip):
+# Doesn't do anything but expose the url to fire
+def getIpString(ip):
         return ip
