@@ -3,6 +3,10 @@
 *.cer
 *.key
 *.req
+*.bak
+*.png
+serial
+hostextfile
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

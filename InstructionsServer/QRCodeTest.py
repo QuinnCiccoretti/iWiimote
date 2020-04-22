@@ -25,11 +25,10 @@ url1 = "http://"+IP + ":" + "8000"
 url = pyqrcode.create(url1)
 url.png("myqr.png",scale=8)
 img = cv2.imread("myqr.png")
-#print(type(img))
+# print(type(img))
 cv2.imwrite('myqr.png',img)
 im = Image.open('myqr.png')
 im.show()
-
 
 with open("index_source.html") as f:
     with open("index.html", "w") as f1:
@@ -43,9 +42,9 @@ with fileinput.FileInput("index.html", inplace=True, backup='.bak') as file:
     for line in file:
         print(line.replace(text_to_search, replacement_text), end='')
 
-
 #Start http server
 Handler = http.server.SimpleHTTPRequestHandler
 with socketserver.TCPServer(("", 8000), Handler) as httpd:
     print("Running your port")
     httpd.serve_forever()
+    
