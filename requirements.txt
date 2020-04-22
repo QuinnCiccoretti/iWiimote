@@ -1,4 +1,6 @@
-requests
-matplotlib
+websockets
 keyboard
 mouse
+pyqrcode
+opencv-python
+pypng
