@@ -2,11 +2,13 @@ from aiohttp import ClientSession
 import asyncio
 import keyboard
 import mouse
+from controls import Game
 
 
 #phyphox configuration
-PP_ADDRESS = "http://192.168.1.251:8080"
-PP_CHANNELS = ["accX", "accY", "accZ", "gyrX", "gyrY", "gyrZ"]
+PP_ADDRESS = "http://192.168.1.4"
+PP_CHANNELS = ["accX", "accY", "accZ", "gyroX", "gyroY", "gyroZ"]
+# PP_CHANNELS = ["accX", "accY", "accZ", "gyrX", "gyrY", "gyrZ"]
 
 async def fetchJSON(url, session):
 	async with session.get(url) as response:
@@ -32,7 +34,7 @@ async def fetchJSON(url, session):
 			# 	keyboard.press('space')
 			# else:
 			# 	keyboard.release('space')
- 
+
 			# if(accX < -1):
 			# 	mouse.press(mouse.LEFT)
 			# 	mouse.release(mouse.LEFT)
