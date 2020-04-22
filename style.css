@@ -1,4 +1,6 @@
-
+h2{
+    color:red;
+}
 .button {
   transition-duration: 0.4s;
 }
