@@ -49,7 +49,7 @@
     </script>
 
     <!-- Orientation Test -->
-    <script>
+    <!-- <script>
         document.onload = function(){
         var ball = document.querySelector('.ball');
         var garden = document.querySelector('.garden');
@@ -84,7 +84,7 @@
         window.addEventListener('deviceorientation', handleOrientation, true);
         }
     </script>
-
+    -->
     <!-- Give Permissions -->
     <script>
         function onClick() {
@@ -106,19 +106,43 @@
 </head>
 
 <body>
-    <!-- HTML  -->
-    <div id="sse">
-        <a href="javascript:WebSocketTest()">Run WebSocket</a>
-        <a href="javascript:onClick()">Give Permissions</a>
+    <div class=cable></div>
+    <div class=controller>
+      <div class=centerBlue>
+        <div class=centerLeft></div>   
+        <div class=centerRight></div>  
+      </div>
+      <div class=centerStart>
+        <div class=SLeft></div>
+        <div class=SRight></div>
+      </div>
+      <div class=centerSelect>
+        <div class=SLeft></div>
+        <div class=SRight></div>
+      </div>
+     
+      <div class=controllerLeft>
+        <div class=circle></div>
+        <div class=crossCenter>
+          <div class=crossTop></div>
+          <div class=crossBottom></div>
+          <div class=crossLeft></div>
+          <div class=crossRight></div>
+          <div class=crossCircle></div>
+        </div>
+      </div>
+      <div class=controllerRight>
+        <div class=backButton1Center>
+          <div class= cornerLeft1 id = green></div>
+          <div class= cornerRight1 id = blue></div>
+        </div>
+        <div class=backButton2Center>
+          <div class= cornerLeft2 id = yellow></div>
+          <div class= cornerRight2 id = red></div>
+        </div>
+      </div>
     </div>
-    <div class="garden">
-        <div class="ball"></div>
-    </div>
-
-    <input id="lastDigits" type="text" name="lastDigits" style="background-color: aquamarine;" />
-
-    <pre class="output"></pre>
-
 </body>
 
+    <script src = "index.js"></script>
 </html>
