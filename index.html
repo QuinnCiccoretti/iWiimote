@@ -34,20 +34,21 @@
     <!-- Websocket Test -->
     <script type="text/javascript">
         var urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('ipAddr')){
+        if (urlParams.has('ipAddr')) {
             var ipAddr = urlParams.get('ipAddr');
+            console.log(ipAddr);
         }
         function WebSocketTest() {
             if ("WebSocket" in window) {
                 alert("WebSocket is supported by your Browser!");
-                
+
                 // Let us open a web socket
                 // var ws = new WebSocket("ws://localhost:8080");
-                if (!ipAddr){
+                if (!ipAddr) {
                     let finalDigits = document.getElementById("lastDigits").value;
                     ipAddr = "192.168." + finalDigits + ":12000";
-                }   
-                var ws = new WebSocket("wss://"+ipAddr);
+                }
+                var ws = new WebSocket("wss://" + ipAddr);
                 // var ws = new WebSocket("wss://localhost:8765");
 
                 ws.onopen = function () {
