@@ -2,3 +2,6 @@ requests
 matplotlib
 keyboard
 mouse
+pyqrcode
+opencv-python
+pypng
