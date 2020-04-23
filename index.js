@@ -95,9 +95,9 @@ getPermission();
 
 let gyroscope = new Gyroscope({ frequency: 60 });
 gyroscope.addEventListener('reading', e => {
-    gyroOut.innerHTML = "X-Axis : " + gyroscope.x + "\n";
-    gyroOut.innerHTML += "Y-Axis: " + gyroscope.y + "\n";
-    gyroOut.innerHTML += "Z-Axis : " + gyroscope.x + "\n";
+    gyroOut.innerHTML = "X-Axis : " + gyroscope.x + "<br />";
+    gyroOut.innerHTML += "Y-Axis: " + gyroscope.y + "<br />";
+    gyroOut.innerHTML += "Z-Axis : " + gyroscope.x + "<br />";
 });
 gyroscope.start();
 
