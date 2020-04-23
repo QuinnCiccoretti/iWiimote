@@ -1,11 +1,30 @@
 //this is javascript
 //
 //
+const KeyboardEnum = Object.freeze(
+    {
+        "Left":  1,
+        "Right": 2,
+        "Up":    3,
+        "Down":  4,
+        "Space": 5,
+    }
+);
+
+const MouseEnum = Object.freeze(
+    {
+        "Right_Click": 0,
+        "Left_Click":  1,
+        "Move":        2,
+    }
+);
+
 var urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('ipAddr')) {
     var ipAddr = urlParams.get('ipAddr');
     console.log(ipAddr);
 }
+
 var testws = document.getElementById("testws");
 testws.addEventListener("click", WebSocketTest);
 var statusbar = document.getElementById('statusbar');
@@ -14,7 +33,7 @@ function WebSocketTest() {
     if ("WebSocket" in window) {
         statusbar.innerHTML = "WebSocket is supported by your Browser!";
         if (!ipAddr) {
-         statusbar.innerHTML = "You buffoon, you didn't enter the ip in the address";   
+            statusbar.innerHTML = "You buffoon, you didn't enter the ip in the address";   
         }
         ws = new WebSocket("wss://" + ipAddr);
 
@@ -58,6 +77,7 @@ function handleOrientation(event) {
     // It center the positioning point to the center of the ball
 }
 
+// Get permission to access device sensors
 function getPermission() {
     // feature detect
     if (typeof DeviceOrientationEvent.requestPermission === 'function') {
@@ -75,6 +95,7 @@ function getPermission() {
 }
 getPermission();
 
+// Right side buttons
 function green(){
     console.log("I'm green");
 }
@@ -91,3 +112,25 @@ document.getElementById("green").addEventListener("click", green);
 document.getElementById("blue").addEventListener("click", blue);
 document.getElementById("red").addEventListener("click", red);
 document.getElementById("yellow").addEventListener("click", yellow);
+
+// D-pad
+function up() {
+    console.log("I'm up");
+    ws.send(JSON.stringify({key: "Up"}));
+}
+function down() {
+    console.log("I'm down");
+    ws.send(JSON.stringify({key: "Down"}));
+}
+function left() {
+    console.log("I'm left");
+    ws.send(JSON.stringify({key: "Left"}));
+}
+function right() {
+    console.log("I'm right");
+    ws.send(JSON.stringify({key: "Right"}));
+}
+document.getElementById("up").addEventListener("click", up);
+document.getElementById("down").addEventListener("click", down);
+document.getElementById("left").addEventListener("click", left);
+document.getElementById("right").addEventListener("click", right);
