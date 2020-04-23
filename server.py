@@ -6,11 +6,24 @@ import asyncio
 import pathlib
 import ssl
 import websockets
+import json
+import mouse
+import keyboard
 
 async def hello(websocket, path):
     while True:
-        name = await websocket.recv()
-        print(f"< {name}")
+        message = await websocket.recv()
+        decode = json.loads(message)
+
+        if 'gyrX' in decode and 'gyrZ' in decode:
+            gyrZ = decode['gyrZ']
+            gyrX = decode['gyrX']
+            mouse.move(-gyrZ*51.2, -gyrX*28.8, absolute=False)
+
+        if 'mouse' in decode:
+            click = decode['mouse']
+            if(click == "Left Click"):
+                mouse.click(mouse.LEFT)
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 localhost_pem = pathlib.Path(__file__).with_name("iwiimote_server.cer")
