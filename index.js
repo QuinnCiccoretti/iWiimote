@@ -6,50 +6,43 @@ if (urlParams.has('ipAddr')) {
     var ipAddr = urlParams.get('ipAddr');
     console.log(ipAddr);
 }
+var testws = document.getElementById("testws");
+testws.addEventListener("click", WebSocketTest);
+var statusbar = document.getElementById('statusbar');
+var ws;
 function WebSocketTest() {
     if ("WebSocket" in window) {
-        alert("WebSocket is supported by your Browser!");
-
-        // Let us open a web socket
-        // var ws = new WebSocket("ws://localhost:8080");
+        statusbar.innerHTML = "WebSocket is supported by your Browser!";
         if (!ipAddr) {
-            let finalDigits = document.getElementById("lastDigits").value;
-            ipAddr = "192.168." + finalDigits + ":12000";
+         statusbar.innerHTML = "You buffoon, you didn't enter the ip in the address";   
         }
-        var ws = new WebSocket("wss://" + ipAddr);
-        // var ws = new WebSocket("wss://localhost:8765");
+        ws = new WebSocket("wss://" + ipAddr);
 
         ws.onopen = function () {
-            // Web Socket is connected, send data using send()
             for (var i = 0; i < 100; i++) {
                 ws.send("I am javascript #" + i);
             }
-            // alert("Message is sent...");
         };
 
         ws.onmessage = function (evt) {
             var received_msg = evt.data;
-            // alert("Message is received...");
         };
 
         ws.onclose = function () {
-            // websocket is closed.
-            alert("Connection is closed...");
+            statusbar.innerHTML = "Connection is closed...";
         };
     } else {
-        // The browser doesn't support WebSocket
-        alert("WebSocket NOT supported by your Browser!");
+        statusbar.innerHTML ="WebSocket NOT supported by your Browser!";
     }
 }
 
-var output = document.getElementById('statusbar');
-
+var gyroOut = document.getElementById('gyrobar');
 function handleOrientation(event) {
     var x = event.beta;  // In degree in the range [-180,180]
     var y = event.gamma; // In degree in the range [-90,90]
 
-    output.innerHTML = "beta : " + x + "\n";
-    output.innerHTML += "gamma: " + y + "\n";
+    gyroOut.innerHTML = "beta : " + x + "\n";
+    gyroOut.innerHTML += "gamma: " + y + "\n";
 
     // Because we don't want to have the device upside down
     // We constrain the x value to the range [-90,90]
