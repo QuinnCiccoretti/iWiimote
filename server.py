@@ -27,9 +27,9 @@ async def hello(websocket, path):
 
         if 'key' in decode:
             command = decode['key'].split()
-            if command[0] == 'Press':
+            if command[0] == 'press':
                 keyboard.press(command[1])
-            elif command[0] == 'Release':
+            elif command[0] == 'release':
                 keyboard.release(command[1])
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)

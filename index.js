@@ -1,23 +1,6 @@
 //this is javascript
 //
 //
-const KeyboardEnum = Object.freeze(
-    {
-        "Left":  1,
-        "Right": 2,
-        "Up":    3,
-        "Down":  4,
-        "Space": 5,
-    }
-);
-
-const MouseEnum = Object.freeze(
-    {
-        "Right_Click": 0,
-        "Left_Click":  1,
-        "Move":        2,
-    }
-);
 
 var urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('ipAddr')) {
