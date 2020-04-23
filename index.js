@@ -58,8 +58,8 @@ function handleOrientation(event) {
     var x = event.beta;  // In degree in the range [-180,180]
     var y = event.gamma; // In degree in the range [-90,90]
 
-    gyroOut.innerHTML = "beta : " + x + "\n";
-    gyroOut.innerHTML += "gamma: " + y + "\n";
+    // gyroOut.innerHTML = "beta : " + x + "\n";
+    // gyroOut.innerHTML += "gamma: " + y + "\n";
 
     // Because we don't want to have the device upside down
     // We constrain the x value to the range [-90,90]
@@ -92,6 +92,14 @@ function getPermission() {
     }
 }
 getPermission();
+
+let gyroscope = new Gyroscope({ frequency: 60 });
+gyroscope.addEventListener('reading', e => {
+    gyroOut.innerHTML = "X-Axis : " + gyroscope.x + "\n";
+    gyroOut.innerHTML += "Y-Axis: " + gyroscope.y + "\n";
+    gyroOut.innerHTML += "Z-Axis : " + gyroscope.x + "\n";
+});
+gyroscope.start();
 
 // Right side buttons
 function green(){
