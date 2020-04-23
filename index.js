@@ -1,5 +1,47 @@
 //this is javascript
 //
+//
+var urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('ipAddr')) {
+    var ipAddr = urlParams.get('ipAddr');
+    console.log(ipAddr);
+}
+function WebSocketTest() {
+    if ("WebSocket" in window) {
+        alert("WebSocket is supported by your Browser!");
+
+        // Let us open a web socket
+        // var ws = new WebSocket("ws://localhost:8080");
+        if (!ipAddr) {
+            let finalDigits = document.getElementById("lastDigits").value;
+            ipAddr = "192.168." + finalDigits + ":12000";
+        }
+        var ws = new WebSocket("wss://" + ipAddr);
+        // var ws = new WebSocket("wss://localhost:8765");
+
+        ws.onopen = function () {
+            // Web Socket is connected, send data using send()
+            for (var i = 0; i < 100; i++) {
+                ws.send("I am javascript #" + i);
+            }
+            // alert("Message is sent...");
+        };
+
+        ws.onmessage = function (evt) {
+            var received_msg = evt.data;
+            // alert("Message is received...");
+        };
+
+        ws.onclose = function () {
+            // websocket is closed.
+            alert("Connection is closed...");
+        };
+    } else {
+        // The browser doesn't support WebSocket
+        alert("WebSocket NOT supported by your Browser!");
+    }
+}
+
 var output = document.getElementById('statusbar');
 
 function handleOrientation(event) {
@@ -52,9 +94,7 @@ function yellow(){
 function blue(){
     console.log("I'm baby");
 }
-console.log("it work");
 document.getElementById("green").addEventListener("click", green);
 document.getElementById("blue").addEventListener("click", blue);
 document.getElementById("red").addEventListener("click", red);
 document.getElementById("yellow").addEventListener("click", yellow);
-console.log("it work");
