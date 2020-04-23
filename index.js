@@ -38,9 +38,7 @@ function WebSocketTest() {
         ws = new WebSocket("wss://" + ipAddr);
 
         ws.onopen = function () {
-            for (var i = 0; i < 100; i++) {
-                ws.send("I am javascript #" + i);
-            }
+            statusbar.innerHTML = "Connected to WebSocket at: " + ipAddr;
         };
 
         ws.onmessage = function (evt) {
