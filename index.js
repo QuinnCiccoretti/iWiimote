@@ -98,6 +98,10 @@ gyroscope.addEventListener('reading', e => {
     gyroOut.innerHTML = "X-Axis : " + gyroscope.x + "<br />";
     gyroOut.innerHTML += "Y-Axis: " + gyroscope.y + "<br />";
     gyroOut.innerHTML += "Z-Axis : " + gyroscope.x + "<br />";
+    ws.send(JSON.stringify({
+        gyrZ: gyroscope.z,
+        gyrX: gyroscope.x
+    }));
 });
 gyroscope.start();
 
@@ -110,6 +114,7 @@ function red(){
 }
 function yellow(){
     console.log("I'm yel");
+    ws.send(JSON.stringify({mouse: "Left Click"}));
 }
 function blue(){
     console.log("I'm baby");
