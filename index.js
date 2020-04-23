@@ -125,23 +125,51 @@ document.getElementById("red").addEventListener("click", red);
 document.getElementById("yellow").addEventListener("click", yellow);
 
 // D-pad
-function up() {
-    console.log("I'm up");
-    ws.send(JSON.stringify({key: "Up"}));
+function press_up() {
+    console.log("I'm up down");
+    ws.send(JSON.stringify({ key: "press up" }));
 }
-function down() {
-    console.log("I'm down");
-    ws.send(JSON.stringify({key: "Down"}));
+function release_up() {
+    console.log("I'm up up");
+    ws.send(JSON.stringify({ key: "release up" }));
 }
-function left() {
-    console.log("I'm left");
-    ws.send(JSON.stringify({key: "Left"}));
+
+function press_down() {
+    console.log("I'm down down");
+    ws.send(JSON.stringify({ key: "press down" }));
 }
-function right() {
-    console.log("I'm right");
-    ws.send(JSON.stringify({key: "Right"}));
+function release_down() {
+    console.log("I'm down up");
+    ws.send(JSON.stringify({ key: "release down" }));
 }
-document.getElementById("up").addEventListener("click", up);
-document.getElementById("down").addEventListener("click", down);
-document.getElementById("left").addEventListener("click", left);
-document.getElementById("right").addEventListener("click", right);
+
+function press_left() {
+    console.log("I'm left down");
+    ws.send(JSON.stringify({ key: "press left" }));
+}
+function release_left() {
+    console.log("I'm left up");
+    ws.send(JSON.stringify({ key: "release left" }));
+}
+
+function press_right() {
+    console.log("I'm right down");
+    ws.send(JSON.stringify({ key: "press right" }));
+}
+function release_right() {
+    console.log("I'm right up");
+    ws.send(JSON.stringify({ key: "release right" }));
+}
+
+addMultipleEventListener("up", ['mousedown', 'touchstart'], press_up);
+addMultipleEventListener("up", ['mouseup', 'touchend'], release_up);
+addMultipleEventListener("down", ['mousedown', 'touchstart'], press_down);
+addMultipleEventListener("down", ['mouseup', 'touchend'], release_down);
+addMultipleEventListener("left", ['mousedown', 'touchstart'], press_left);
+addMultipleEventListener("left", ['mouseup', 'touchend'], release_left);
+addMultipleEventListener("right", ['mousedown', 'touchstart'], press_right);
+addMultipleEventListener("right", ['mouseup', 'touchend'], release_right);
+
+function addMultipleEventListener(element, events, handler) {
+    events.forEach(e => document.getElementById(element).addEventListener(e, handler, false));
+}

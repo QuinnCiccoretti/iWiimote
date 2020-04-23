@@ -25,6 +25,13 @@ async def hello(websocket, path):
             if(click == "Left Click"):
                 mouse.click(mouse.LEFT)
 
+        if 'key' in decode:
+            command = decode['key'].split()
+            if command[0] == 'Press':
+                keyboard.press(command[1])
+            elif command[0] == 'Release':
+                keyboard.release(command[1])
+
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 localhost_pem = pathlib.Path(__file__).with_name("iwiimote_server.cer")
 ssl_context.load_cert_chain(localhost_pem, keyfile="iwiimote_server.key")
