@@ -2,17 +2,16 @@
 //
 //
 
-var urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('ipAddr')) {
-    var ipAddr = urlParams.get('ipAddr');
-    console.log(ipAddr);
-}
-
 var testws = document.getElementById("testws");
 testws.addEventListener("click", WebSocketTest);
 var statusbar = document.getElementById('statusbar');
 var ws;
 function WebSocketTest() {
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('ipAddr')) {
+        var ipAddr = urlParams.get('ipAddr');
+        console.log(ipAddr);
+    }
     if ("WebSocket" in window) {
         statusbar.innerHTML = "WebSocket is supported by your Browser!";
         if (!ipAddr) {
