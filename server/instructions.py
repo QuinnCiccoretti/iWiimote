@@ -11,20 +11,14 @@ import os
 import sys
 import fileinput
 
-def startInstructionServer():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(('10.255.255.255', 1))
-    # hostname = socket.gethostname()    
-    hostname =  s.getsockname()[0]
-    s.close()
-    IP = socket.gethostbyname(hostname)      
+def startInstructionServer(IP):     
     print("Your Computer IP Address is:" + IP)
 
     url1 = "http://"+IP + ":" + "8000"
 
     #Generate QR Code
     url = pyqrcode.create(url1)
-    url.png("myqr.png",scale=8)
+    url.png("Insmyqr.png",scale=8)
     img = cv2.imread("myqr.png")
     # print(type(img))
     cv2.imwrite('myqr.png',img)
