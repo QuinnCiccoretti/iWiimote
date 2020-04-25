@@ -13,13 +13,21 @@ def parseMessage(msg):
 
 def startControllerServer(IP):
     async def hello(websocket, path):
-        name = await websocket.recv()
-        print(f"< {name}")
+        while True:
+            try:
+                name = await websocket.recv()
+                print(f"< {name}")
 
-        greeting = f"Hello {name}!"
+                greeting = f"Hello {name}!"
 
-        await websocket.send(greeting)
-        print(f"> {greeting}")
+                await websocket.send(greeting)
+                print(f"> {greeting}")
+            except Exception as e:
+                print('Error!: ', e)
+                break
+            except KeyboardInterrupt:
+                print("Received exit, exiting")
+                break
 
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     # server_cer = pathlib.Path('./certificates').with_name("iwiimote_server.cer")
@@ -28,9 +36,11 @@ def startControllerServer(IP):
     print("Server is running!")
 
     start_server = websockets.serve(hello, IP, 12000, ssl=ssl_context)
-
-    asyncio.get_event_loop().run_until_complete(start_server)
-    asyncio.get_event_loop().run_forever()
+    try:
+        asyncio.get_event_loop().run_until_complete(start_server)
+        asyncio.get_event_loop().run_forever()
+    except KeyboardInterrupt:
+        print("Received exit, exiting")
 
 if __name__ == '__main__':
     startControllerServer("192.168.1.3")

@@ -18,7 +18,7 @@ def startInstructionServer(IP):
 
     #Generate QR Code
     url = pyqrcode.create(url1)
-    url.png("Insmyqr.png",scale=8)
+    url.png("myqr.png",scale=8)
     img = cv2.imread("myqr.png")
     # print(type(img))
     cv2.imwrite('myqr.png',img)
@@ -43,6 +43,5 @@ def startInstructionServer(IP):
         print("Running your port")
         httpd.serve_forever()
 
-
 if __name__ == '__main__':
-    startInstructionServer()
+    startInstructionServer('192.168.1.3')

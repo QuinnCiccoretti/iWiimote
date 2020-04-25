@@ -1,4 +1,6 @@
 # !/bin/bash
+$1 = IP
+
 cd ./server/certificates
-./generateCerts.sh
+./generateCerts.sh 192.168.1.3
 cd ../
