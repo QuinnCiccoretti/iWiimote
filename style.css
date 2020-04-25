@@ -1,7 +1,8 @@
 :root {
-  --med-px: 50px;
-  --margin-px: 50px;
-  --minus-m-px: -50px;
+  --med-px: 100px;
+  --margin-px: 100px;
+  --minus-m-px: -100px;
+  --csize: 300px;
 }
 h2{
     color:red;
@@ -55,8 +56,8 @@ body{
 }
 
 .controllerLeft{
-  height: 250px;
-  width: 250px;
+  height: var(--csize);
+  width: var(--csize);
   background-color: #E6E6E6;
   position: absolute;
   border-radius: 100%;
@@ -65,8 +66,8 @@ body{
 }
 
 .controllerRight{
-  height: 250px;
-  width: 250px;
+  height: var(--csize);
+  width: var(--csize);
   background-color: #B8B8B8;
   position: relative;
   border-radius: 100%;
@@ -76,14 +77,14 @@ body{
 }
 
 .circle{
-  height: 200px;
-  width: 200px;
+  height: var(--csize);
+  width: var(--csize);
   background-color: #E6E6E6;
   position: absolute;
   border-radius: 100%;
   border: solid 5px rgba(184, 184, 184, 1);
-  margin-left:22px;
-  margin-top: 32px;
+  margin-left:32px;
+  margin-top: 60px;
 }
 
 .crossCenter{
