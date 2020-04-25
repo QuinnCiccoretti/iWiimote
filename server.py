@@ -12,25 +12,30 @@ import keyboard
 
 async def hello(websocket, path):
     while True:
-        message = await websocket.recv()
-        decode = json.loads(message)
+        try:
+            message = await websocket.recv()
+            decode = json.loads(message)
+            print(message)
 
-        if 'gyrX' in decode and 'gyrZ' in decode:
-            gyrZ = decode['gyrZ']
-            gyrX = decode['gyrX']
-            mouse.move(-gyrZ*51.2, -gyrX*28.8, absolute=False)
+            if 'gyrX' in decode and 'gyrZ' in decode:
+                gyrZ = decode['gyrZ']
+                gyrX = decode['gyrX']
+                mouse.move(-gyrZ*51.2, -gyrX*28.8, absolute=False)
 
-        if 'mouse' in decode:
-            click = decode['mouse']
-            if(click == "Left Click"):
-                mouse.click(mouse.LEFT)
+            if 'mouse' in decode:
+                click = decode['mouse']
+                if(click == "Left Click"):
+                    mouse.click(mouse.LEFT)
 
-        if 'key' in decode:
-            command = decode['key'].split()
-            if command[0] == 'press':
-                keyboard.press(command[1])
-            elif command[0] == 'release':
-                keyboard.release(command[1])
+            if 'key' in decode:
+                command = decode['key'].split()
+                if command[0] == 'press':
+                    keyboard.press(command[1])
+                elif command[0] == 'release':
+                    keyboard.release(command[1])
+        except:
+            print("connection lost")
+            break
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 localhost_pem = pathlib.Path(__file__).with_name("iwiimote_server.cer")
