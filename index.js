@@ -45,8 +45,8 @@ function handleMotion(event) {
     gyroOut.innerHTML += "Y-Axis: " + gyroscope.beta + "<br />";
     gyroOut.innerHTML += "Z-Axis : " + gyroscope.gamma + "<br />";
     ws.send(JSON.stringify({
-        gyrZ: gyroscope.z,
-        gyrX: gyroscope.x
+        gyrZ: gyroscope.alpha,
+        gyrX: gyroscope.beta
     }));
 }
 
@@ -57,7 +57,6 @@ function getPermission() {
         DeviceMotionEvent.requestPermission()
             .then(permissionState => {
                 if (permissionState === 'granted') {
-                    alert("Bruh");
                     window.addEventListener('devicemotion', handleMotion);
                 }
             })
@@ -71,9 +70,11 @@ function getPermission() {
 // Right side buttons
 function press_green(){
     console.log("press green");
+    ws.send(JSON.stringify({ key: "press shift" }));
 }
 function release_green() {
     console.log("release green");
+    ws.send(JSON.stringify({ key: "release shift" }));
 }
 
 function press_blue() {
@@ -85,11 +86,9 @@ function release_blue() {
 
 function press_red() {
     console.log("press red");
-    ws.send(JSON.stringify({ key: "press shift" }));
 }
 function release_red() {
     console.log("release red");
-    ws.send(JSON.stringify({ key: "release shift" }));
 }
 
 function press_yellow() {
