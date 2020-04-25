@@ -59,6 +59,9 @@ function getPermission() {
                 if (permissionState === 'granted') {
                     window.addEventListener('devicemotion', handleMotion);
                 }
+                else {
+                    gyroOut.innerHTML = "Cannot access gyroscope";
+                }
             })
             .catch(console.error);
     } else {
@@ -66,26 +69,49 @@ function getPermission() {
         window.addEventListener('devicemotion', handleMotion);
     }
 }
-getPermission();
+document.getElementById("perm").addEventListener("click", getPermission);
 
 // Right side buttons
-function green(){
-    console.log("I'm green");
+function press_green(){
+    console.log("press green");
 }
-function red(){
-    console.log("I'm red");
+function release_green() {
+    console.log("release green");
 }
-function yellow(){
-    console.log("I'm yel");
-    ws.send(JSON.stringify({mouse: "Left Click"}));
+
+function press_blue() {
+    console.log("press blue");
 }
-function blue(){
-    console.log("I'm baby");
+function release_blue() {
+    console.log("release blue");
 }
-document.getElementById("green").addEventListener("click", green);
-document.getElementById("blue").addEventListener("click", blue);
-document.getElementById("red").addEventListener("click", red);
-document.getElementById("yellow").addEventListener("click", yellow);
+
+function press_red() {
+    console.log("press red");
+    ws.send(JSON.stringify({ key: "press shift" }));
+}
+function release_red() {
+    console.log("release red");
+    ws.send(JSON.stringify({ key: "release shift" }));
+}
+
+function press_yellow() {
+    console.log("press yellow");
+    ws.send(JSON.stringify({ key: "press up" }));
+}
+function release_yellow() {
+    console.log("release yellow");
+    ws.send(JSON.stringify({ key: "release up" }));
+}
+
+addMultipleEventListener("green", ['mousedown', 'touchstart'], press_green);
+addMultipleEventListener("green", ['mouseup', 'touchend'], release_green);
+addMultipleEventListener("blue", ['mousedown', 'touchstart'], press_blue);
+addMultipleEventListener("blue", ['mouseup', 'touchend'], release_blue);
+addMultipleEventListener("red", ['mousedown', 'touchstart'], press_red);
+addMultipleEventListener("red", ['mouseup', 'touchend'], release_red);
+addMultipleEventListener("yellow", ['mousedown', 'touchstart'], press_yellow);
+addMultipleEventListener("yellow", ['mouseup', 'touchend'], release_yellow);
 
 // D-pad
 function press_up() {
