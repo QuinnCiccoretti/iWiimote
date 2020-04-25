@@ -12,7 +12,6 @@ Run `pip install -r requirements.txt` to get the necessary python packages
 Make sure you have the most up to date version of openssl (1.1.1c or higher)
 
 ### 1. Startup
-Run 
 ```
 cd server
 python start.py
