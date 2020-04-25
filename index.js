@@ -57,6 +57,7 @@ function getPermission() {
         DeviceMotionEvent.requestPermission()
             .then(permissionState => {
                 if (permissionState === 'granted') {
+                    alert("Bruh");
                     window.addEventListener('devicemotion', handleMotion);
                 }
             })
