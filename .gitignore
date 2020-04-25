@@ -7,6 +7,7 @@
 *.png
 serial
 hostextfile
+.vscode/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -7,6 +7,7 @@ import pathlib
 import ssl
 import websockets
 import os
+import socket
 
 def parseMessage(msg):
     pass
@@ -15,32 +16,43 @@ def startControllerServer(IP):
     async def hello(websocket, path):
         while True:
             try:
-                name = await websocket.recv()
-                print(f"< {name}")
+                message = await websocket.recv()
+                decode = json.loads(message)
+                print(message)
 
-                greeting = f"Hello {name}!"
+                if 'gyrX' in decode and 'gyrZ' in decode:
+                    gyrZ = decode['gyrZ']
+                    gyrX = decode['gyrX']
+                    mouse.move(-gyrZ*51.2, -gyrX*28.8, absolute=False)
 
-                await websocket.send(greeting)
-                print(f"> {greeting}")
-            except Exception as e:
-                print('Error!: ', e)
-                break
-            except KeyboardInterrupt:
-                print("Received exit, exiting")
+                if 'mouse' in decode:
+                    click = decode['mouse']
+                    if(click == "Left Click"):
+                        mouse.click(mouse.LEFT)
+
+                if 'key' in decode:
+                    command = decode['key'].split()
+                    if command[0] == 'press':
+                        keyboard.press(command[1])
+                    elif command[0] == 'release':
+                        keyboard.release(command[1])
+            except:
+                print("connection lost")
                 break
 
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    # server_cer = pathlib.Path('./certificates').with_name("iwiimote_server.cer")
-    # server_key = pathlib.Path('./certificates').with_name("iwiimote_server.key")
     ssl_context.load_cert_chain(certfile="./certificates/iwiimote_server.cer", keyfile="./certificates/iwiimote_server.key")
     print("Server is running!")
 
     start_server = websockets.serve(hello, IP, 12000, ssl=ssl_context)
-    try:
-        asyncio.get_event_loop().run_until_complete(start_server)
-        asyncio.get_event_loop().run_forever()
-    except KeyboardInterrupt:
-        print("Received exit, exiting")
+    asyncio.get_event_loop().run_until_complete(start_server)
+    asyncio.get_event_loop().run_forever()
+    # TODO: Close server with keyboard interrupt inside of run_forever?
 
 if __name__ == '__main__':
-    startControllerServer("192.168.1.3")
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('10.255.255.255', 1))   
+    hostname =  s.getsockname()[0]
+    s.close()
+    IP = socket.gethostbyname(hostname)
+    startControllerServer(IP)

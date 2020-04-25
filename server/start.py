@@ -12,6 +12,7 @@ if __name__ == '__main__':
     hostname =  s.getsockname()[0]
     s.close()
     IP = socket.gethostbyname(hostname)
+    print("Your IP Address is: " + IP)
 
     server_details = [(startInstructionServer,IP), (startControllerServer,IP)]
     # Run servers
