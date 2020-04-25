@@ -22,15 +22,15 @@ function WebSocketTest() {
         ws = new WebSocket("wss://" + ipAddr);
 
         ws.onopen = function () {
-            statusbar.innerHTML = "Connected to WebSocket at: " + ipAddr;
+            testws.style.backgroundColor = 'green';
         };
 
-        ws.onmessage = function (evt) {
-            var received_msg = evt.data;
-        };
+        // ws.onmessage = function (evt) {
+        //     var received_msg = evt.data;
+        // };
 
         ws.onclose = function () {
-            statusbar.innerHTML = "Connection is closed...";
+            testws.style.backgroundColor = 'green';
         };
     } else {
         statusbar.innerHTML ="WebSocket NOT supported by your Browser!";
