@@ -45,8 +45,8 @@ function handleMotion(event) {
     gyroOut.innerHTML += "Y-Axis: " + gyroscope.beta + "<br />";
     gyroOut.innerHTML += "Z-Axis : " + gyroscope.gamma + "<br />";
     ws.send(JSON.stringify({
-        gyrX: gyroscope.beta,
-        gyrY: gyroscope.gamma
+        gyrZ: gyroscope.alpha,
+        gyrX: gyroscope.beta
     }));
 }
 
