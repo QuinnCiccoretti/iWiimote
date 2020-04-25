@@ -24,7 +24,7 @@ def startControllerServer(IP):
                 if 'gyrX' in decode and 'gyrZ' in decode:
                     gyrX = decode['gyrX']
                     gyrZ = decode['gyrZ']
-                    mouse.move(-gyrX, -gyrZ, absolute=False)
+                    mouse.move(-gyrZ, -gyrX, absolute=False)
 
                 if 'mouse' in decode:
                     click = decode['mouse']
