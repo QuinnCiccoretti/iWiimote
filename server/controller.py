@@ -3,11 +3,13 @@
 # WSS (WS over TLS) server example, with a self-signed certificate
 
 import asyncio
-import pathlib
 import ssl
 import websockets
 import os
 import socket
+import keyboard
+import mouse
+import json
 
 def parseMessage(msg):
     pass
@@ -18,7 +20,6 @@ def startControllerServer(IP):
             try:
                 message = await websocket.recv()
                 decode = json.loads(message)
-                print(message)
 
                 if 'gyrX' in decode and 'gyrZ' in decode:
                     gyrZ = decode['gyrZ']
