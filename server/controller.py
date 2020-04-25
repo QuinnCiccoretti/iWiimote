@@ -22,9 +22,9 @@ def startControllerServer(IP):
                 decode = json.loads(message)
 
                 if 'gyrX' in decode and 'gyrZ' in decode:
-                    gyrZ = decode['gyrZ']
                     gyrX = decode['gyrX']
-                    mouse.move(-gyrZ, -gyrX, absolute=False)
+                    gyrZ = decode['gyrZ']
+                    mouse.move(-gyrX, -gyrZ, absolute=False)
 
                 if 'mouse' in decode:
                     click = decode['mouse']
