@@ -38,56 +38,35 @@ function WebSocketTest() {
 }
 
 var gyroOut = document.getElementById('gyrobar');
-function handleOrientation(event) {
-    var x = event.beta;  // In degree in the range [-180,180]
-    var y = event.gamma; // In degree in the range [-90,90]
+function handleMotion(event) {
+    let gyroscope = event.rotationRate;
 
-    // gyroOut.innerHTML = "beta : " + x + "\n";
-    // gyroOut.innerHTML += "gamma: " + y + "\n";
-
-    // Because we don't want to have the device upside down
-    // We constrain the x value to the range [-90,90]
-    if (x > 90) { x = 90 };
-    if (x < -90) { x = -90 };
-
-    // To make computation easier we shift the range of 
-    // x and y to [0,180]
-    x += 90;
-    y += 90;
-
-    // 10 is half the size of the ball
-    // It center the positioning point to the center of the ball
+    gyroOut.innerHTML = "X-Axis : " + gyroscope.alpha + "<br />";
+    gyroOut.innerHTML += "Y-Axis: " + gyroscope.beta + "<br />";
+    gyroOut.innerHTML += "Z-Axis : " + gyroscope.gamma + "<br />";
+    ws.send(JSON.stringify({
+        gyrZ: gyroscope.z,
+        gyrX: gyroscope.x
+    }));
 }
 
 // Get permission to access device sensors
 function getPermission() {
-    // feature detect
-    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission()
+    // feature detect for iOS 13+
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
             .then(permissionState => {
                 if (permissionState === 'granted') {
-                    window.addEventListener('deviceorientation', handleOrientation);
+                    window.addEventListener('devicemotion', handleMotion);
                 }
             })
             .catch(console.error);
     } else {
         // handle regular non iOS 13+ devices
-        window.addEventListener('deviceorientation', handleOrientation);
+        window.addEventListener('devicemotion', handleMotion);
     }
 }
 getPermission();
-
-let gyroscope = new Gyroscope({ frequency: 60 });
-gyroscope.addEventListener('reading', e => {
-    gyroOut.innerHTML = "X-Axis : " + gyroscope.x + "<br />";
-    gyroOut.innerHTML += "Y-Axis: " + gyroscope.y + "<br />";
-    gyroOut.innerHTML += "Z-Axis : " + gyroscope.x + "<br />";
-    ws.send(JSON.stringify({
-        gyrZ: gyroscope.z,
-        gyrX: gyroscope.x
-    }));
-});
-gyroscope.start();
 
 // Right side buttons
 function green(){
