@@ -9,6 +9,7 @@
 serial
 hostextfile
 .vscode/
+/server/index.html
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
