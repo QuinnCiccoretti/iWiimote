@@ -37,76 +37,77 @@ function WebSocketTest() {
     }
 }
 
-var gyroOut = document.getElementById('gyrobar');
-function handleOrientation(event) {
-    var x = event.beta;  // In degree in the range [-180,180]
-    var y = event.gamma; // In degree in the range [-90,90]
+function handleMotion(event) {
+    var gyroOut = document.getElementById('gyrobar');
+    let gyroscope = event.rotationRate;
 
-    // gyroOut.innerHTML = "beta : " + x + "\n";
-    // gyroOut.innerHTML += "gamma: " + y + "\n";
-
-    // Because we don't want to have the device upside down
-    // We constrain the x value to the range [-90,90]
-    if (x > 90) { x = 90 };
-    if (x < -90) { x = -90 };
-
-    // To make computation easier we shift the range of 
-    // x and y to [0,180]
-    x += 90;
-    y += 90;
-
-    // 10 is half the size of the ball
-    // It center the positioning point to the center of the ball
+    gyroOut.innerHTML = "X-Axis : " + gyroscope.alpha + "<br />";
+    gyroOut.innerHTML += "Y-Axis: " + gyroscope.beta + "<br />";
+    gyroOut.innerHTML += "Z-Axis : " + gyroscope.gamma + "<br />";
+    ws.send(JSON.stringify({
+        gyrZ: gyroscope.alpha,
+        gyrX: gyroscope.beta
+    }));
 }
 
 // Get permission to access device sensors
 function getPermission() {
-    // feature detect
-    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission()
+    // feature detect for iOS 13+
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
             .then(permissionState => {
                 if (permissionState === 'granted') {
-                    window.addEventListener('deviceorientation', handleOrientation);
+                    window.addEventListener('devicemotion', handleMotion);
                 }
             })
             .catch(console.error);
     } else {
         // handle regular non iOS 13+ devices
-        window.addEventListener('deviceorientation', handleOrientation);
+        window.addEventListener('devicemotion', handleMotion);
     }
 }
-getPermission();
-
-let gyroscope = new Gyroscope({ frequency: 60 });
-gyroscope.addEventListener('reading', e => {
-    gyroOut.innerHTML = "X-Axis : " + gyroscope.x + "<br />";
-    gyroOut.innerHTML += "Y-Axis: " + gyroscope.y + "<br />";
-    gyroOut.innerHTML += "Z-Axis : " + gyroscope.x + "<br />";
-    ws.send(JSON.stringify({
-        gyrZ: gyroscope.z,
-        gyrX: gyroscope.x
-    }));
-});
-gyroscope.start();
 
 // Right side buttons
-function green(){
-    console.log("I'm green");
+function press_green(){
+    console.log("press green");
+    ws.send(JSON.stringify({ key: "press shift" }));
 }
-function red(){
-    console.log("I'm red");
+function release_green() {
+    console.log("release green");
+    ws.send(JSON.stringify({ key: "release shift" }));
 }
-function yellow(){
-    console.log("I'm yel");
-    ws.send(JSON.stringify({mouse: "Left Click"}));
+
+function press_blue() {
+    console.log("press blue");
 }
-function blue(){
-    console.log("I'm baby");
+function release_blue() {
+    console.log("release blue");
 }
-document.getElementById("green").addEventListener("click", green);
-document.getElementById("blue").addEventListener("click", blue);
-document.getElementById("red").addEventListener("click", red);
-document.getElementById("yellow").addEventListener("click", yellow);
+
+function press_red() {
+    console.log("press red");
+}
+function release_red() {
+    console.log("release red");
+}
+
+function press_yellow() {
+    console.log("press yellow");
+    ws.send(JSON.stringify({ key: "press up" }));
+}
+function release_yellow() {
+    console.log("release yellow");
+    ws.send(JSON.stringify({ key: "release up" }));
+}
+
+addMultipleEventListener("green", ['mousedown', 'touchstart'], press_green);
+addMultipleEventListener("green", ['mouseup', 'touchend'], release_green);
+addMultipleEventListener("blue", ['mousedown', 'touchstart'], press_blue);
+addMultipleEventListener("blue", ['mouseup', 'touchend'], release_blue);
+addMultipleEventListener("red", ['mousedown', 'touchstart'], press_red);
+addMultipleEventListener("red", ['mouseup', 'touchend'], release_red);
+addMultipleEventListener("yellow", ['mousedown', 'touchstart'], press_yellow);
+addMultipleEventListener("yellow", ['mouseup', 'touchend'], release_yellow);
 
 // D-pad
 function press_up() {

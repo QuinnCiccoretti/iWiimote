@@ -4,6 +4,20 @@
   --minus-m-px: -100px;
   --csize: 300px;
 }
+/* https://css-tricks.com/snippets/css/orientation-lock/ */
+@media screen and (orientation:portrait) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+/*     background-color: red; */
+  }
+}
+
 h2{
     color:red;
 }
