@@ -45,7 +45,9 @@ canvas {
 body{
   background-color: #FEFEFE;
 }
-
+.bhl:active{
+    background-color: blue;
+}
 .controller{
   margin-top: 100px;
   height: 200px;
@@ -56,8 +58,8 @@ body{
 }
 
 .controllerLeft{
-  height: var(--csize);
-  width: var(--csize);
+  height: 320px;
+  width: 320px;
   background-color: #E6E6E6;
   position: absolute;
   border-radius: 100%;
@@ -66,8 +68,8 @@ body{
 }
 
 .controllerRight{
-  height: var(--csize);
-  width: var(--csize);
+  height: 320px;
+  width: 320px;
   background-color: #B8B8B8;
   position: relative;
   border-radius: 100%;
