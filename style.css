@@ -1,3 +1,9 @@
+:root {
+  --med-px: 100px;
+  --margin-px: 100px;
+  --minus-m-px: -100px;
+  --csize: 300px;
+}
 /* https://css-tricks.com/snippets/css/orientation-lock/ */
 @media screen and (orientation:portrait) {
   html {
@@ -53,7 +59,9 @@ canvas {
 body{
   background-color: #FEFEFE;
 }
-
+.bhl:active{
+    background-color: blue;
+}
 .controller{
   margin-top: 100px;
   height: 200px;
@@ -64,8 +72,8 @@ body{
 }
 
 .controllerLeft{
-  height: 250px;
-  width: 250px;
+  height: 320px;
+  width: 320px;
   background-color: #E6E6E6;
   position: absolute;
   border-radius: 100%;
@@ -74,8 +82,8 @@ body{
 }
 
 .controllerRight{
-  height: 250px;
-  width: 250px;
+  height: 320px;
+  width: 320px;
   background-color: #B8B8B8;
   position: relative;
   border-radius: 100%;
@@ -85,20 +93,20 @@ body{
 }
 
 .circle{
-  height: 150px;
-  width: 150px;
+  height: var(--csize);
+  width: var(--csize);
   background-color: #E6E6E6;
   position: absolute;
   border-radius: 100%;
   border: solid 5px rgba(184, 184, 184, 1);
-  margin-left: 42px;
-  margin-top: 52px;
+  margin-left:32px;
+  margin-top: 60px;
 }
 
 .crossCenter{
   background-color: #333333;
-  width: 35px;
-  height: 35px;
+  width:var(--med-px);
+  height:var(--med-px);
   margin-top: 110px;
   margin-left: 100px;
   position: relative;
@@ -116,38 +124,38 @@ body{
 
 .crossTop{
   background-color: #333333;
-  width: 35px;
-  height: 35px;
+  width:var(--med-px);
+  height:var(--med-px);
   position: absolute;
   border-radius: 15%;
-  margin-top: -30px;
+  margin-top:var(--minus-m-px);
 }
 
 .crossBottom{
   background-color: #333333;
-  width: 35px;
-  height: 35px;
+  width:var(--med-px);
+  height:var(--med-px);
   position: absolute;
   border-radius: 15%;
-  margin-top: 30px;
+  margin-top:var(--margin-px);
 }
 
 .crossLeft{
   background-color: #333333;
-  width: 35px;
-  height: 35px;
+  width:var(--med-px);
+  height:var(--med-px);
   position: absolute;
   border-radius: 15%;
-  margin-left: -30px;
+  margin-left:var(--minus-m-px);
 }
 
 .crossRight{
   background-color: #333333;
-  width: 35px;
-  height: 35px;
+  width:var(--med-px);
+  height:var(--med-px);
   position: absolute;
   border-radius: 15%;
-  margin-left: 30px;
+  margin-left:var(--margin-px);
 }
 
 .centerBlue{
@@ -155,7 +163,7 @@ body{
   width: 50px;
   height: 20px;
   margin-left: 175px;
-  margin-top: 30px;
+  margin-top:var(--margin-px);
   background-color: #0099FF;
 }
 
@@ -242,7 +250,7 @@ body{
 .centerStart{
   background-color: #B8B8B8;
   position: absolute;
-  height: 35px;
+  height:var(--med-px);
   width: 10px;
   margin-left: 180px;
   margin-top: 110px;
@@ -252,7 +260,7 @@ body{
 .centerSelect{
   background-color: #B8B8B8;
   position: absolute;
-  height: 35px;
+  height:var(--med-px);
   width: 10px;
   margin-left: 205px;
   margin-top: 110px;
@@ -265,7 +273,7 @@ body{
   border-radius: 100%;
   height: 10px;
   width: 10px;
-  margin-top: 30px;
+  margin-top:var(--margin-px);
 }
 
 .SRight{
