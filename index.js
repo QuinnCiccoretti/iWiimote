@@ -37,8 +37,8 @@ function WebSocketTest() {
     }
 }
 
-var gyroOut = document.getElementById('gyrobar');
 function handleMotion(event) {
+    var gyroOut = document.getElementById('gyrobar');
     let gyroscope = event.rotationRate;
 
     gyroOut.innerHTML = "X-Axis : " + gyroscope.alpha + "<br />";
@@ -59,9 +59,6 @@ function getPermission() {
                 if (permissionState === 'granted') {
                     window.addEventListener('devicemotion', handleMotion);
                 }
-                else {
-                    gyroOut.innerHTML = "Cannot access gyroscope";
-                }
             })
             .catch(console.error);
     } else {
@@ -69,7 +66,6 @@ function getPermission() {
         window.addEventListener('devicemotion', handleMotion);
     }
 }
-// document.getElementById("perm").addEventListener("click", getPermission);
 
 // Right side buttons
 function press_green(){
