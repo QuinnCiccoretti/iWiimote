@@ -5,6 +5,7 @@
 *.req
 *.bak
 *.png
+/server/index.html
 serial
 hostextfile
 .vscode/
