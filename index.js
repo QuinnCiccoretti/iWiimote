@@ -69,7 +69,7 @@ function getPermission() {
         window.addEventListener('devicemotion', handleMotion);
     }
 }
-document.getElementById("perm").addEventListener("click", getPermission);
+// document.getElementById("perm").addEventListener("click", getPermission);
 
 // Right side buttons
 function press_green(){
