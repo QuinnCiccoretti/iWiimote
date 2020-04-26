@@ -7,11 +7,15 @@
 </head>
 
 <body>
+    <select id="controller_selector">
+      <option value="gamepad">gamepad</option>
+      <option value="pointer">pointer</option>
+    </select>
     <h2 id="gyrobar"></h2>
     <h2 id="statusbar"></h2>
-    <div class=cable></div>
 
-    <div class=controller>
+    <div>
+    <div id="gamepadController" class=controller>
       
       <button class="button centerBlue" id="testws">ON</button>
       <a class="centerButton" href="javascript:getPermission()">Give Permissions</a>
@@ -36,11 +40,9 @@
         </div>
       </div>
     </div>
+    </div>
+    <div style = "display: none;" id="pointerController">I am pointer</div>
     
-    <select id="controller_selector">
-      <option value="gamepad">gamepad</option>
-      <option value="pointer">pointer</option>
-    </select>
 </body>
     <script src = "index.js"></script>
 </html>

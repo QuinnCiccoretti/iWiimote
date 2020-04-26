@@ -4,6 +4,10 @@
   --minus-m-px: -100px;
   --csize: 300px;
 }
+#controller_selector{
+  position: absolute;
+  left: 49%;
+}
 /* https://css-tricks.com/snippets/css/orientation-lock/ */
 @media screen and (orientation:portrait) {
   html {
@@ -40,7 +44,6 @@ h2{
   color: white;
 }
 body {
-    margin: 0;
     touch-action: none;
     background-color:red;
     -webkit-user-select: none; /* Safari */
@@ -77,6 +80,7 @@ body{
 }
 
 .controller{
+  top: 100px;
   margin-top: 100px;
   height: 200px;
   width: 400px;
