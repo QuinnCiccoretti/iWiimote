@@ -166,11 +166,11 @@ function release_left_click() {
 
 function press_right_click() {
     console.log("I'm right click down");
-    ws.send(JSON.stringify({ key: "press right" }));
+    ws.send(JSON.stringify({ mouse: "press right" }));
 }
 function release_right_click() {
     console.log("I'm right click up");
-    ws.send(JSON.stringify({ key: "release right" }));
+    ws.send(JSON.stringify({ mouse: "release right" }));
 }
 
 addMultipleEventListener("leftclicker", ['mousedown', 'touchstart'], press_left_click);
