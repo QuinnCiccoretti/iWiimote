@@ -10,8 +10,10 @@ import socket
 import keyboard
 from pynput.mouse import Button, Controller
 import json
+import mouse
 
-mouse = Controller()
+pynput_mouse = Controller()
+
 def parseMessage(msg):
     pass
 
@@ -20,25 +22,24 @@ def startControllerServer(IP):
         while True:
             message = await websocket.recv()
             decode = json.loads(message)
-            print(message)
             if 'gyrX' in decode and 'gyrZ' in decode:
                 gyrX = decode['gyrX']
                 gyrZ = decode['gyrZ']
-                mouse.move(-gyrZ, -gyrX)
+                mouse.move(-gyrZ, -gyrX, absolute=False)
                 # mouse.move_relative(-gyrZ,-gyrX)
 
             if 'mouse' in decode:
                 command = decode['mouse'].split()
                 if command[0] == 'press':
                     if(command[1] == "left"):
-                        mouse.press(Button.left)
+                        pynput_mouse.press(Button.left)
                     else:
-                        mouse.press(Button.right)
+                        pynput_mouse.press(Button.right)
                 elif command[0] == 'release':
                     if(command[1] == "left"):
-                        mouse.release(Button.left)
+                        pynput_mouse.release(Button.left)
                     else:
-                        mouse.release(Button.right)
+                        pynput_mouse.release(Button.right)
             if 'key' in decode:
                 command = decode['key'].split()
                 if command[0] == 'press':
