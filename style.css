@@ -4,12 +4,23 @@
   --minus-m-px: -100px;
   --csize: 300px;
 }
+.half{
+    display: table-cell;
+    width: 50%;
+    height: 500px;
+    background-color: gray;
+    border:20px solid #cdcdcd;
+    border-radius: 20px;
+}
+.half:active{
+    opacity: 50%;
+}
 #controller_selector{
   position: absolute;
   left: 49%;
 }
 /* https://css-tricks.com/snippets/css/orientation-lock/ */
-@media screen and (orientation:portrait) {
+/*@media screen and (orientation:portrait) {
   html {
     transform: rotate(-90deg);
     transform-origin: left top;
@@ -18,10 +29,9 @@
     position: absolute;
     top: 100%;
     left: 0;
-/*     background-color: red; */
   }
 }
-
+*/
 h2{
     color:red;
 }
@@ -66,7 +76,10 @@ body{
   background-color: #FEFEFE;
 }
 .bhl:active{
-    background-color: blue;
+    opacity: 50%;
+}
+.rhs:active{
+    border-color: gray;
 }
 *{
   margin: auto;
