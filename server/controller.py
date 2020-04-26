@@ -21,37 +21,40 @@ def startControllerServer(IP):
     async def hello(websocket, path):
         print("Phone Connected")
         while True:
-            message = await websocket.recv()
-            decode = json.loads(message)
-            if 'gyrX' in decode and 'gyrZ' in decode:
-                gyrX = decode['gyrX']
-                gyrZ = decode['gyrZ']
-                mouse.move(-gyrZ, -gyrX, absolute=False)
-                # mouse.move_relative(-gyrZ,-gyrX)
+            try:
+                message = await websocket.recv()
+                decode = json.loads(message)
+                if 'gyrX' in decode and 'gyrZ' in decode:
+                    gyrX = decode['gyrX']
+                    gyrZ = decode['gyrZ']
+                    mouse.move(-gyrZ, -gyrX, absolute=False)
+                    # mouse.move_relative(-gyrZ,-gyrX)
 
-            if 'mouse' in decode:
-                command = decode['mouse'].split()
-                if command[0] == 'press':
-                    if(command[1] == "left"):
-                        pynput_mouse.press(Button.left)
-                    else:
-                        pynput_mouse.press(Button.right)
-                elif command[0] == 'release':
-                    if(command[1] == "left"):
-                        pynput_mouse.release(Button.left)
-                    else:
-                        pynput_mouse.release(Button.right)
-                elif command[0] == "scroll":
-                    deltaX = decode['dx'] / 500
-                    deltaY = decode['dy'] / 500
-                    pynput_mouse.scroll(-deltaX, deltaY)
-            if 'key' in decode:
-                command = decode['key'].split()
-                if command[0] == 'press':
-                    keyboard.press(command[1])
-                elif command[0] == 'release':
-                    keyboard.release(command[1])
-
+                if 'mouse' in decode:
+                    command = decode['mouse'].split()
+                    if command[0] == 'press':
+                        if(command[1] == "left"):
+                            pynput_mouse.press(Button.left)
+                        else:
+                            pynput_mouse.press(Button.right)
+                    elif command[0] == 'release':
+                        if(command[1] == "left"):
+                            pynput_mouse.release(Button.left)
+                        else:
+                            pynput_mouse.release(Button.right)
+                    elif command[0] == "scroll":
+                        deltaX = decode['dx'] / 500
+                        deltaY = decode['dy'] / 500
+                        pynput_mouse.scroll(-deltaX, deltaY)
+                if 'key' in decode:
+                    command = decode['key'].split()
+                    if command[0] == 'press':
+                        keyboard.press(command[1])
+                    elif command[0] == 'release':
+                        keyboard.release(command[1])
+            except (asyncio.IncompleteReadError, websockets.ConnectionClosedError):
+                print("Disconnected")
+                break
 
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     ssl_context.load_cert_chain(certfile="./certificates/iwiimote_server.cer", keyfile="./certificates/iwiimote_server.key")
