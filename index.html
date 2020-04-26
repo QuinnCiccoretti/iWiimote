@@ -12,12 +12,12 @@
     <div class=cable></div>
 
     <div class=controller>
-      <div class=centerBlue>
-        <div class=centerLeft></div>   
-        <div class=centerRight></div>  
-      </div>
+      
+      <button class="button centerBlue" id="testws">ON</button>
+      <a class="centerButton" href="javascript:getPermission()">Give Permissions</a>
      
       <div class=controllerLeft>
+        <div class=circle></div>
         <div class=crossCenter>
           <div class="crossTop bhl" id = up></div>
           <div class="crossBottom bhl" id = down></div>
@@ -41,9 +41,6 @@
       <option value="gamepad">gamepad</option>
       <option value="pointer">pointer</option>
     </select>
-
-    <button class="button" id="testws">Test WS</button>
-    <a href="javascript:getPermission()">Give Permissions</a>
 </body>
     <script src = "index.js"></script>
 </html>

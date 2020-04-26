@@ -15,22 +15,21 @@ var statusbar = document.getElementById('statusbar');
 var ws;
 function WebSocketTest() {
     if ("WebSocket" in window) {
-        statusbar.innerHTML = "WebSocket is supported by your Browser!";
         if (!ipAddr) {
             statusbar.innerHTML = "You buffoon, you didn't enter the ip in the address";   
         }
         ws = new WebSocket("wss://" + ipAddr);
 
         ws.onopen = function () {
-            statusbar.innerHTML = "Connected to WebSocket at: " + ipAddr;
+            testws.style.backgroundColor = 'green';
         };
 
-        ws.onmessage = function (evt) {
-            var received_msg = evt.data;
-        };
+        // ws.onmessage = function (evt) {
+        //     var received_msg = evt.data;
+        // };
 
         ws.onclose = function () {
-            statusbar.innerHTML = "Connection is closed...";
+            testws.style.backgroundColor = 'green';
         };
     } else {
         statusbar.innerHTML ="WebSocket NOT supported by your Browser!";
@@ -41,9 +40,9 @@ function handleMotion(event) {
     var gyroOut = document.getElementById('gyrobar');
     let gyroscope = event.rotationRate;
 
-    gyroOut.innerHTML = "X-Axis : " + gyroscope.alpha + "<br />";
-    gyroOut.innerHTML += "Y-Axis: " + gyroscope.beta + "<br />";
-    gyroOut.innerHTML += "Z-Axis : " + gyroscope.gamma + "<br />";
+    // gyroOut.innerHTML = "X-Axis : " + gyroscope.alpha + "<br />";
+    // gyroOut.innerHTML += "Y-Axis: " + gyroscope.beta + "<br />";
+    // gyroOut.innerHTML += "Z-Axis : " + gyroscope.gamma + "<br />";
     ws.send(JSON.stringify({
         gyrX: gyroscope.alpha,
         gyrZ: gyroscope.gamma
