@@ -40,6 +40,8 @@ def startControllerServer(IP):
                         pynput_mouse.release(Button.left)
                     else:
                         pynput_mouse.release(Button.right)
+                elif command[0] == "scroll":
+                    print("dx: " + command[1], " , dy " + command[2])
             if 'key' in decode:
                 command = decode['key'].split()
                 if command[0] == 'press':

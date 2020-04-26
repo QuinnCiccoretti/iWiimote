@@ -171,10 +171,41 @@ function release_right_click() {
     ws.send(JSON.stringify({ mouse: "release right" }));
 }
 
+// Scroll area
+var startX = 0;
+var startY = 0;
+var scrollarea = document.getElementById('scrollarea');
+function start_scroll(e) {
+    console.log("I'm scroll start");
+    startX = e.changedTouches[0].screenX;
+    startY = e.changedTouches[0].screenY;
+    scrollarea.addEventListener('touchmove', process_scroll);
+}
+function end_scroll(e) {
+    console.log("I'm scroll end");
+    scrollarea.removeEventListener('touchmove', process_scroll);
+}
+function process_scroll(e) {
+    screenX = e.changedTouches[0].screenX;
+    screenY = e.changedTouches[0].screenY;
+    dx = startX - screenX;
+    dy = startY - screenY;
+    console.log("Delta X: ", dx)
+    console.log("Delta Y: ", dy);
+    ws.send(JSON.stringify({
+        mouse: "scroll",
+        dx: dx,
+        dy: dy,
+    }));
+}
+
+
 addMultipleEventListener("leftclicker", ['mousedown', 'touchstart'], press_left_click);
 addMultipleEventListener("leftclicker", ['mouseup', 'touchend'], release_left_click);
 addMultipleEventListener("rightclicker", ['mousedown', 'touchstart'], press_right_click);
 addMultipleEventListener("rightclicker", ['mouseup', 'touchend'], release_right_click);
+addMultipleEventListener("scrollarea", ['mousedown', 'touchstart'], start_scroll);
+addMultipleEventListener("scrollarea", ['mouseup', 'touchend'], end_scroll);
 
 function addMultipleEventListener(element, events, handler) {
     events.forEach(e => document.getElementById(element).addEventListener(e, handler, false));
