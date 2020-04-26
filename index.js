@@ -157,3 +157,21 @@ addMultipleEventListener("right", ['mouseup', 'touchend'], release_right);
 function addMultipleEventListener(element, events, handler) {
     events.forEach(e => document.getElementById(element).addEventListener(e, handler, false));
 }
+
+var selector = document.getElementById("controller_selector");
+selector.onchange = selectController;
+function selectController(){
+    console.log("switching control scheme");
+    let value = selector.value;
+    let gamepad = document.getElementById("gamepadController");
+    let pointer = document.getElementById("pointerController");
+    console.log( typeof value); 
+    if(value === "gamepad"){
+        gamepad.style.display = "block";
+        pointer.style.display = "none";
+    }
+    else if (value ==="pointer"){
+        gamepad.style.display = "none";
+        pointer.style.display = "block";
+    }
+}

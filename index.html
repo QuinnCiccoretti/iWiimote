@@ -7,11 +7,15 @@
 </head>
 
 <body>
+    <select id="controller_selector">
+      <option value="gamepad">gamepad</option>
+      <option value="pointer">pointer</option>
+    </select>
     <h2 id="gyrobar"></h2>
     <h2 id="statusbar"></h2>
-    <div class=cable></div>
 
-    <div class=controller>
+    <div>
+    <div id="gamepadController" class=controller>
       
       <button class="button centerBlue" id="testws">ON</button>
       <a class="centerButton" href="javascript:getPermission()">Give Permissions</a>
@@ -27,20 +31,25 @@
       </div>
       <div class=controllerRight>
         <div class=backButton1Center>
-          <div class= cornerLeft1 id = green></div>
-          <div class= cornerRight1 id = blue></div>
+          <div class= "cornerLeft1 rhs" id = green></div>
+          <div class= "cornerRight1 rhs" id = blue></div>
         </div>
         <div class=backButton2Center>
-          <div class= cornerLeft2 id = yellow></div>
-          <div class= cornerRight2 id = red></div>
+          <div class= "cornerLeft2 rhs" id = yellow></div>
+          <div class= "cornerRight2 rhs" id = red></div>
         </div>
       </div>
     </div>
+    </div>
+    <div style = "display: none;" id="pointerController">
+        <div style="width: 100%; display: table;">
+            <div style="display: table-row">
+                <div id = "leftclicker" class = "half" > Left </div>
+                <div id = "rightclicker" class = "half"> Right </div>
+            </div>
+        </div>
+    </div>
     
-    <select id="controller_selector">
-      <option value="gamepad">gamepad</option>
-      <option value="pointer">pointer</option>
-    </select>
 </body>
     <script src = "index.js"></script>
 </html>
