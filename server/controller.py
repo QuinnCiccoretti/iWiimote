@@ -19,6 +19,7 @@ def parseMessage(msg):
 
 def startControllerServer(IP):
     async def hello(websocket, path):
+        print("Phone Connected")
         while True:
             message = await websocket.recv()
             decode = json.loads(message)
@@ -41,7 +42,9 @@ def startControllerServer(IP):
                     else:
                         pynput_mouse.release(Button.right)
                 elif command[0] == "scroll":
-                    print("dx: " + command[1], " , dy " + command[2])
+                    deltaX = decode['dx'] / 500
+                    deltaY = decode['dy'] / 500
+                    pynput_mouse.scroll(-deltaX, deltaY)
             if 'key' in decode:
                 command = decode['key'].split()
                 if command[0] == 'press':
@@ -65,4 +68,5 @@ if __name__ == '__main__':
     hostname =  s.getsockname()[0]
     s.close()
     IP = socket.gethostbyname(hostname)
+    print(IP)
     startControllerServer(IP)
