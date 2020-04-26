@@ -28,9 +28,11 @@ def startControllerServer(IP):
                     mouse._os_mouse.move_relative(-gyrZ,-gyrX)
 
                 if 'mouse' in decode:
-                    click = decode['mouse']
-                    if(click == "Left Click"):
-                        mouse.click(mouse.LEFT)
+                    command = decode['mouse'].split()
+                    if command[0] == 'press':
+                        mouse.press(command[1])
+                    elif command[0] == 'release':
+                        mouse.release(command[1])
 
                 if 'key' in decode:
                     command = decode['key'].split()

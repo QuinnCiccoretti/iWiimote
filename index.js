@@ -154,6 +154,30 @@ addMultipleEventListener("left", ['mouseup', 'touchend'], release_left);
 addMultipleEventListener("right", ['mousedown', 'touchstart'], press_right);
 addMultipleEventListener("right", ['mouseup', 'touchend'], release_right);
 
+// Pointer
+function press_left_click() {
+    console.log("I'm left click down");
+    ws.send(JSON.stringify({ mouse: "press left" }));
+}
+function release_left_click() {
+    console.log("I'm left click up");
+    ws.send(JSON.stringify({ mouse: "release left" }));
+}
+
+function press_right_click() {
+    console.log("I'm right click down");
+    ws.send(JSON.stringify({ key: "press right" }));
+}
+function release_right_click() {
+    console.log("I'm right click up");
+    ws.send(JSON.stringify({ key: "release right" }));
+}
+
+addMultipleEventListener("leftclicker", ['mousedown', 'touchstart'], press_left_click);
+addMultipleEventListener("leftclicker", ['mouseup', 'touchend'], release_left_click);
+addMultipleEventListener("rightclicker", ['mousedown', 'touchstart'], press_right_click);
+addMultipleEventListener("rightclicker", ['mouseup', 'touchend'], release_right_click);
+
 function addMultipleEventListener(element, events, handler) {
     events.forEach(e => document.getElementById(element).addEventListener(e, handler, false));
 }
