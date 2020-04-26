@@ -56,13 +56,11 @@ function getPermission() {
         DeviceMotionEvent.requestPermission()
             .then(permissionState => {
                 if (permissionState === 'granted') {
-                    window.addEventListener('devicemotion', handleMotion);
                 }
             })
             .catch(console.error);
     } else {
         // handle regular non iOS 13+ devices
-        window.addEventListener('devicemotion', handleMotion);
     }
 }
 
@@ -189,13 +187,14 @@ function selectController(){
     let value = selector.value;
     let gamepad = document.getElementById("gamepadController");
     let pointer = document.getElementById("pointerController");
-    console.log( typeof value); 
     if(value === "gamepad"){
         gamepad.style.display = "block";
         pointer.style.display = "none";
+        window.removeEventListener('devicemotion', handleMotion);
     }
     else if (value ==="pointer"){
         gamepad.style.display = "none";
         pointer.style.display = "block";
+        window.addEventListener('devicemotion', handleMotion);
     }
 }

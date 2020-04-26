@@ -8,8 +8,11 @@ import websockets
 import os
 import socket
 import keyboard
-import mouse
+from pynput.mouse import Button, Controller
 import json
+import mouse
+
+pynput_mouse = Controller()
 
 def parseMessage(msg):
     pass
@@ -17,32 +20,33 @@ def parseMessage(msg):
 def startControllerServer(IP):
     async def hello(websocket, path):
         while True:
-            try:
-                message = await websocket.recv()
-                decode = json.loads(message)
+            message = await websocket.recv()
+            decode = json.loads(message)
+            if 'gyrX' in decode and 'gyrZ' in decode:
+                gyrX = decode['gyrX']
+                gyrZ = decode['gyrZ']
+                mouse.move(-gyrZ, -gyrX, absolute=False)
+                # mouse.move_relative(-gyrZ,-gyrX)
 
-                if 'gyrX' in decode and 'gyrZ' in decode:
-                    gyrX = decode['gyrX']
-                    gyrZ = decode['gyrZ']
-                    # mouse.move(-gyrZ, -gyrX, absolute=False)
-                    mouse._os_mouse.move_relative(-gyrZ,-gyrX)
+            if 'mouse' in decode:
+                command = decode['mouse'].split()
+                if command[0] == 'press':
+                    if(command[1] == "left"):
+                        pynput_mouse.press(Button.left)
+                    else:
+                        pynput_mouse.press(Button.right)
+                elif command[0] == 'release':
+                    if(command[1] == "left"):
+                        pynput_mouse.release(Button.left)
+                    else:
+                        pynput_mouse.release(Button.right)
+            if 'key' in decode:
+                command = decode['key'].split()
+                if command[0] == 'press':
+                    keyboard.press(command[1])
+                elif command[0] == 'release':
+                    keyboard.release(command[1])
 
-                if 'mouse' in decode:
-                    command = decode['mouse'].split()
-                    if command[0] == 'press':
-                        mouse.press(command[1])
-                    elif command[0] == 'release':
-                        mouse.release(command[1])
-
-                if 'key' in decode:
-                    command = decode['key'].split()
-                    if command[0] == 'press':
-                        keyboard.press(command[1])
-                    elif command[0] == 'release':
-                        keyboard.release(command[1])
-            except:
-                print("connection lost")
-                break
 
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     ssl_context.load_cert_chain(certfile="./certificates/iwiimote_server.cer", keyfile="./certificates/iwiimote_server.key")
