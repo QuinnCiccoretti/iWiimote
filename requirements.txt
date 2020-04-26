@@ -4,3 +4,4 @@ mouse
 pyqrcode
 opencv-python
 pypng
+pynput
