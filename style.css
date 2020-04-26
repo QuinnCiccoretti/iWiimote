@@ -14,6 +14,7 @@
 }
 .half:active{
     opacity: 50%;
+    border:20px solid #575656;
 }
 #controller_selector{
   position: absolute;
@@ -47,6 +48,14 @@ h2{
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
+}
+
+#controller_selector option {
+  font-size: 50px;
+}
+
+#controller_selector {
+  font-size: 50px;
 }
 
 .button:hover {
