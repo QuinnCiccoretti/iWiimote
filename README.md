@@ -29,7 +29,8 @@ python controller.py
 ```
 
 ### Controller Website
-https://iwiimote.herokuapp.com/?ipAddr=IP:12000
-![Image description]()
+The website is effectively your controller. The Instructions server will generate a link to the website with the correct query parameter to `ipAddr`. https://iwiimote.herokuapp.com/?ipAddr=IP:12000
 
+![Image description](Capture.PNG)
+![Image description](heroku1.png)
 
