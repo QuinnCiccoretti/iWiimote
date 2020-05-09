@@ -1,4 +1,6 @@
 # iWiimote
+[Watch the video](http://www.youtube.com/watch?v=4x07fuPlfCU)
+
 [![Watch the video](http://img.youtube.com/vi/4x07fuPlfCU/0.jpg)](http://www.youtube.com/watch?v=4x07fuPlfCU "Video demo")
 
 iWiimote is a functional game controller, implemented on the
