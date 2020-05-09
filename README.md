@@ -1,16 +1,17 @@
 # iWiimote
 
 
-## Getting Started
+## Things you'll need
 
 ### Python
 
-This is written using python3.7
-
+Use python 3.
 Run `pip install -r requirements.txt` to get the necessary python packages
 
-### 0. Openssl
+### Openssl
 Make sure you have the most up to date version of openssl (1.1.1c or higher). You can check this by running `openssl version` in your command line.
+
+
 
 ### 1. Generate Certification for websockets
 To establish the connection for the game controller, we must generate some certificates.
@@ -32,8 +33,10 @@ controller to connect over your local network.
 cd server
 python start.py
 ```
-Run the above to start the server. Scan the QR code and go to the website on your local network for instructions. 
+Run the above to start the server.
 
+On your mobile phone,
+scan the QR code and go to the website on your local network for instructions. 
 The webpage will walk you through installation of the certificates you generated in the firs step.
 
 ### 3. Start the controller server
@@ -54,6 +57,10 @@ Depending on your installation you may have to `sudo pip install -r requirements
 The python script will detect your active IP address and host a websocket server
 on port 12000.
 
+If you are using the instruction server, follow the link.
+Otherwise, navigate to `https://iwiimote.herokuapp.com/?ipAddr=IP:12000`,
+where IP is your active IP address
+
 ### 4. Navigating the Controller Website
 The website is effectively your controller. The Instructions server will generate a link to the website with the correct query parameter to `ipAddr`. https://iwiimote.herokuapp.com/?ipAddr=IP:12000
 
@@ -69,7 +76,7 @@ and the `controller.py` server should print "Phone connected".
 Try pressing the d-pad, or using the dropdown to select pointer mode. Not working?
 Create a Github issue and we'll look at it.
 
-### Control Flow
+### Data Flow
 
 ![Flowchart](img/dataFlow.png)
 
