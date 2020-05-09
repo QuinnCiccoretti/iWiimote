@@ -1,5 +1,13 @@
 # iWiimote
+> iWiimote is a functional game controller, implemented on the
+web, that uses gyroscopic and touch sensors to emulate input
+on the computer it is connected to.
+Though it has some limitations,
+the iWiimote is fun and easy to use with a variety of games.
 
+Care about the technicalities? See [our paper](./iWiimote.pdf).
+
+Just want to try it? Read on!
 
 ## Things you'll need
 
@@ -11,7 +19,7 @@ Run `pip install -r requirements.txt` to get the necessary python packages
 ### Openssl
 Make sure you have the most up to date version of openssl (1.1.1c or higher). You can check this by running `openssl version` in your command line.
 
-
+## Getting started
 
 ### 1. Generate Certification for websockets
 To establish the connection for the game controller, we must generate some certificates.
