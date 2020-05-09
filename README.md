@@ -15,25 +15,29 @@ Make sure you have the most up to date version of openssl (1.1.1c or higher). Yo
 
 ### 1. Generate Certification for websockets
 To establish the connection for the game controller, we must generate some certificates.
-There are two versions of the shell script for doing so, one for [Windows](generateCerts.sh)
-and one for [Linux](generateCertsLinux.sh).
-
-Please run 
+There are two versions of the shell script for doing so, one for Windows:
 ```bash
 generateCerts.sh IP
 ```
-in the root directory of this project, where IP is your active local IP address.
-For example, `generateCerts.sh 192.168.1.3`.
+and one for Linux:
+```bash
+./generateCertsLinux.sh IP
+```
+Run this command in the root directory of this project, where IP is your active local IP address.
+For example, 
+```bash
+generateCerts.sh 192.168.1.3`.
+```
 
 This script will use openSSL to generate self-signed certificates to allow the
 controller to connect over your local network.
 
 ### 2. Start instructions server
+If you haven't done this before, you'll want the instructions server.
 ```bash
 cd server
 python start.py
 ```
-Run the above to start the server.
 
 On your mobile phone,
 scan the QR code and go to the website on your local network for instructions. 
