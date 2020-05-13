@@ -38,7 +38,7 @@ and one for Linux:
 Run this command in the root directory of this project, where IP is your active local IP address.
 For example, 
 ```bash
-generateCerts.sh 192.168.1.3`.
+generateCerts.sh 192.168.1.3
 ```
 
 This script will use openSSL to generate self-signed certificates to allow the
